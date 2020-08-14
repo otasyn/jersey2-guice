@@ -36,8 +36,7 @@ this is just reconfiguring dependencies.
 
 ### Dependencies
 
-Similar to the `pom.xml`, dependencies are listed within a `dependencies`
-block.
+Dependencies are listed within a `dependencies` block.
 
 ```groovy
 dependencies {
