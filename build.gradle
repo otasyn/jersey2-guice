@@ -1,6 +1,7 @@
 plugins {
   id 'java'
   id 'war'
+  id 'org.gretty' version '3.0.3'
 }
 
 repositories {
@@ -28,3 +29,21 @@ dependencies {
 group = 'org.otasyn.template'
 version = '0.1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_11
+
+/**
+ * Gretty
+ *
+ * Tasks
+ *   :appRun   - Spin up a servlet container
+ *   :appStart - Spin up a servlet container and can be stopped with :appStop
+ *   :appStop  - Stop a servlet container spun up with :appStart
+ *
+ * Configuration
+ *   https://gretty-gradle-plugin.github.io/gretty-doc/Gretty-configuration.html
+ */
+gretty {
+  contextPath 'jersey2-guice'
+
+  // servletContainer 'tomcat9'
+  servletContainer 'jetty9.4'
+}

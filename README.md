@@ -57,17 +57,29 @@ $ ./gradlew build
 
 ### Running
 
-To run the project, copy the generated WAR to a servlet container, such as
-Tomcat or Jetty.
+Instead of directly generating and deploying a WAR, the project can be run
+using Gretty.  There are various configurations available, but this project
+only sets the `contextPath` and `servletContainer`.  By default, the
+`servletContainer` is set to `jetty9.4`, but other versions of Jetty or
+Tomcat can be used.
 
-```bash
-$ cp build/libs/jersey2-guice-0.1.0-SNAPSHOT.jar $CATALINA_HOME/webapps/jersey2-guice.war
+```groovy
+gretty {
+  contextPath = 'jersey2-guice'
+  servletContainer = 'jetty9.4'
+}
 ```
 
-Launch the servlet container, then use curl or a browser to demonstrate that the servlet works.
+Launch the servlet container using `appRun`.
 
 ```bash
-$ curl http://localhost:8080/resource
+$ ./gradlew appRun
+```
+
+Use curl or a browser to demonstrate that the servlet works.
+
+```bash
+$ curl http://localhost:8080/jersey2-guice/sample
 ```
 
 Explanation
