@@ -27,4 +27,4 @@ dependencies {
 
 group = 'com.gwidgets'
 version = '0.1.0-SNAPSHOT'
-sourceCompatibility = '1.8'
+sourceCompatibility = JavaVersion.VERSION_11
