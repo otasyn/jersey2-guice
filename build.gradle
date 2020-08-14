@@ -1,0 +1,30 @@
+plugins {
+  id 'java'
+  id 'war'
+}
+
+repositories {
+  jcenter()
+}
+
+ext {
+  jerseyVersion = '2.31'
+  guiceBridgeVersion = '2.6.1'
+  guiceVersion = '4.2.3'
+  jaxbVersion = '2.3.3'
+  servletApiVersion = '4.0.1'
+}
+
+dependencies {
+  implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
+  implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+  implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
+  implementation "com.google.inject:guice:${guiceVersion}"
+  implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
+  implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
+  providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
+}
+
+group = 'com.gwidgets'
+version = '0.1.0-SNAPSHOT'
+sourceCompatibility = '1.8'

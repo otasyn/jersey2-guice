@@ -27,16 +27,53 @@ to get the original source working.
 </dependency>
 ```
 
-Running
--------
+Gradle
+------
 
-To run the project:
+One purpose of this project is to build using Gradle, so the Maven `pom.xml`
+has been adapted to a Gradle `build.gradle` and other related files.  Mostly,
+this is just reconfiguring dependencies.
 
-```bash
-$ mvn clean package jetty:run
+### Dependencies
+
+Similar to the `pom.xml`, dependencies are listed within a `dependencies`
+block.
+
+```groovy
+dependencies {
+  implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
+  implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
+  implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
+  implementation "com.google.inject:guice:${guiceVersion}"
+  implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
+  implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
+  providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
+}
 ```
 
-To demonstrate that the servlet works:
+### Servlet WAR
+
+To generate a WAR, include the `war` plugin.  Some configurations can be made,
+but it works pretty well using the default configuration.
+
+### Building
+
+Build the project using the Gradle task `build`.
+
+```bash
+$ ./gradlew build
+```
+
+### Running
+
+To run the project, copy the generated WAR to a servlet container, such as
+Tomcat or Jetty.
+
+```bash
+$ cp build/libs/jersey2-guice-0.1.0-SNAPSHOT.jar $CATALINA_HOME/webapps/jersey2-guice.war
+```
+
+Launch the servlet container, then use curl or a browser to demonstrate that the servlet works.
 
 ```bash
 $ curl http://localhost:8080/resource
