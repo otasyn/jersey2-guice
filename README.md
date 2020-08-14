@@ -8,23 +8,15 @@ Adjustments
 -----------
 
 Since Java 11, JAXB has been removed and must be added as an separate
-dependency.  So, the necessary dependencies have been added in order
-to get the original source working.
+dependency.  So, the necessary dependencies have been added.
 
-```xml
-<!-- API, java.xml.bind module -->
-<dependency>
-  <groupId>jakarta.xml.bind</groupId>
-  <artifactId>jakarta.xml.bind-api</artifactId>
-  <version>2.3.2</version>
-</dependency>
-
-<!-- Runtime, com.sun.xml.bind module -->
-<dependency>
-  <groupId>org.glassfish.jaxb</groupId>
-  <artifactId>jaxb-runtime</artifactId>
-  <version>2.3.2</version> 
-</dependency>
+```groovy
+dependencies {
+  ...
+  implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+  implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
+  ...
+}
 ```
 
 Gradle
@@ -94,7 +86,7 @@ necessary to include every package if they can all be safely found
 within a single parent package.
 
 ```java
-packages("com.gwidgets.resource");
+packages("org.otasyn.template.jersey2.guice");
 ```
 
 #### GuiceIntoHK2Bridge

@@ -25,6 +25,6 @@ dependencies {
   providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 }
 
-group = 'com.gwidgets'
+group = 'org.otasyn.template'
 version = '0.1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_11
