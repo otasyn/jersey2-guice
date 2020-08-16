@@ -1,5 +1,5 @@
-Jersey2 - Guice Bridge
-======================
+Jersey2 - Guice Bridge with WebJar
+==================================
 
 This is a template that combines Jersey 2 and Guice.  It uses the
 [HK2 guice-bridge](https://github.com/javaee/hk2/tree/master/guice-bridge).
@@ -41,8 +41,41 @@ dependencies {
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
   implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
 
+  implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
+
   providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
 }
+```
+
+### WebJar
+
+This project uses an WebJar containing an Angular client.  Angular
+is not required for building a client WebJar.  In order to use the
+the WebJar, add the publication as a dependency.
+
+#### Contents
+
+Beginning with Servlet 3.0, accessing the contents of the WebJar is
+simple.  Other project types are compatible with WebJars, as described
+in [the documentation](https://www.webjars.org/documentation).  This
+project uses a WebJar that contains a file called `includes.jsp` that
+contains generated `<script>` tags.  The `includes.jsp` file can be
+included in a JSP to run the client code.
+
+```jsp
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <base href="${pageContext.request.contextPath}/" />
+    <jsp:include page="/webjars/angular-webjar/0.1.0-SNAPSHOT/includes.jsp" />
+  </head>
+  <body>
+    <app-root></app-root>
+  </body>
+</html>
 ```
 
 ### Servlet WAR
@@ -143,7 +176,7 @@ public class Config extends ResourceConfig {
 }
 ```
 
-### URL Rewriting
+#### URL Rewriting
 
 In order to use Jersey to serve JSPs at the context root, URL rewriting
 may be used.  This project uses UrlRewriteFilter.

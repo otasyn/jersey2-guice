@@ -1,12 +1,13 @@
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
   <head>
-    <title>Jersey2 - Guice</title>
+    <base href="${pageContext.request.contextPath}/" />
+    <jsp:include page="/webjars/angular-webjar/0.1.0-SNAPSHOT/includes.jsp" />
   </head>
   <body>
-    <h1>Jersey2 - Guice</h1>
-
-    ${it.jspName}
+    <app-root></app-root>
   </body>
 </html>
