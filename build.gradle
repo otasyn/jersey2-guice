@@ -5,6 +5,7 @@ plugins {
 }
 
 repositories {
+  mavenLocal()
   jcenter()
 }
 
@@ -18,6 +19,7 @@ ext {
 
 dependencies {
   implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
+  implementation "org.glassfish.jersey.ext:jersey-mvc-jsp:${jerseyVersion}"
   implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
   implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
   implementation "com.google.inject:guice:${guiceVersion}"

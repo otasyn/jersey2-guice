@@ -33,12 +33,35 @@ Dependencies are listed within a `dependencies` block.
 ```groovy
 dependencies {
   implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
+  implementation "org.glassfish.jersey.ext:jersey-mvc-jsp:${jerseyVersion}"
   implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
   implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
   implementation "com.google.inject:guice:${guiceVersion}"
   implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
   providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
+}
+```
+
+### JSPs
+
+In order to serve JSPs with Jersey, include the `jersey-mvc-jsp` dependency.
+
+```groovy
+dependencies {
+  ...
+  implementation "org.glassfish.jersey.ext:jersey-mvc-jsp:${jerseyVersion}"
+  ...
+}
+```
+
+The `ApplicationPath` on the `ResourceConfig` should also be set to
+something other than root.
+
+```java
+@ApplicationPath("/rest")
+public class Config extends ResourceConfig {
+  ...
 }
 ```
 
