@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<!--
+  Configuration file for UrlRewriteFilter
+  http://www.tuckey.org/urlrewrite/
+-->
+<urlrewrite>
+
+  <rule>
+    <name>Ignore-rest</name>
+    <note>
+      Do not change /rest requests.
+    </note>
+    <from>^/rest(/.*)?$</from>
+    <to last="true">-</to>
+  </rule>
+
+  <rule>
+    <name>Ignore-WEB-INF</name>
+    <note>
+      Do not change /WEB-INF requests.
+    </note>
+    <from>^/WEB-INF(/.*)?$</from>
+    <to last="true">-</to>
+  </rule>
+
+  <rule>
+    <name>Ignore-webjars</name>
+    <note>
+      Do not change /webjars requests.
+    </note>
+    <from>^/webjars(/.*)?$</from>
+    <to last="true">-</to>
+  </rule>
+
+  <rule>
+    <name>Forward-Everything-Else</name>
+    <note>
+      Forward all other requests to /rest/views.
+    </note>
+    <from>^(/.*)?$</from>
+    <to last="true">/rest/views</to>
+  </rule>
+
+</urlrewrite>
+

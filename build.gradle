@@ -15,6 +15,7 @@ ext {
   guiceVersion = '4.2.3'
   jaxbVersion = '2.3.3'
   servletApiVersion = '4.0.1'
+  urlRewriteVersion = '4.0.3'
 }
 
 dependencies {
@@ -25,6 +26,8 @@ dependencies {
   implementation "com.google.inject:guice:${guiceVersion}"
   implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
+  implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
+
   providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
 }
 

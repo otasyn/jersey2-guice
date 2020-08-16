@@ -39,29 +39,9 @@ dependencies {
   implementation "com.google.inject:guice:${guiceVersion}"
   implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
+  implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
+
   providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
-}
-```
-
-### JSPs
-
-In order to serve JSPs with Jersey, include the `jersey-mvc-jsp` dependency.
-
-```groovy
-dependencies {
-  ...
-  implementation "org.glassfish.jersey.ext:jersey-mvc-jsp:${jerseyVersion}"
-  ...
-}
-```
-
-The `ApplicationPath` on the `ResourceConfig` should also be set to
-something other than root.
-
-```java
-@ApplicationPath("/rest")
-public class Config extends ResourceConfig {
-  ...
 }
 ```
 
@@ -148,6 +128,51 @@ _See Also: https://github.com/google/guice/wiki_
 for HTTP requests.
 - `GET`, `POST`, and other similar annotations describes the request
 method that will be handled by the method.
+
+### JSPs
+
+In order to serve JSPs with Jersey, include the `jersey-mvc-jsp` dependency.
+
+The `ApplicationPath` on the `ResourceConfig` should also be set to
+something other than root.
+
+```java
+@ApplicationPath("/rest")
+public class Config extends ResourceConfig {
+  ...
+}
+```
+
+### URL Rewriting
+
+In order to use Jersey to serve JSPs at the context root, URL rewriting
+may be used.  This project uses UrlRewriteFilter.
+
+Create a file called `urlrewrite.xml` in `WEB-INF`.
+
+```xml
+<urlrewrite>
+
+  <rule>
+    <name>Ignore-rest</name>
+    <note>
+      Do not change /rest requests.
+    </note>
+    <from>^/rest(/.*)?$</from>
+    <to last="true">-</to>
+  </rule>
+
+  <rule>
+    <name>Forward-Everything-Else</name>
+    <note>
+      Forward all other requests to /rest/views.
+    </note>
+    <from>^(/.*)?$</from>
+    <to last="true">/rest/views</to>
+  </rule>
+
+</urlrewrite>
+```
 
 Original Source
 ---------------
