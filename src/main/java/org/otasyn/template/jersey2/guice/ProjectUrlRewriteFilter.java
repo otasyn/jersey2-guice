@@ -15,7 +15,7 @@ import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
     initParams = {
         @WebInitParam(name = "confReloadCheckInterval", value = "-1"),
         @WebInitParam(name = "confPath", value = "/WEB-INF/urlrewrite.xml"),
-        @WebInitParam(name = "logLevel", value = "WARN"),
+        @WebInitParam(name = "logLevel", value = "slf4j"),
         @WebInitParam(name = "statusPath", value = "/rewrite-status"),
         @WebInitParam(name = "statusEnabled", value = "true"),
         @WebInitParam(name = "statusEnabledOnHosts", value = "localhost, local, 127.0.0.1"),

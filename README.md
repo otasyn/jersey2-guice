@@ -15,7 +15,7 @@ dependencies {
   ...
   implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
   implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
-  ...
+...
 }
 ```
 
@@ -46,6 +46,22 @@ dependencies {
   providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
 }
 ```
+
+### Logging
+
+In this project, logging is handled by SLF4J.  In order to work, it needs
+dependencies for `slf4j-api` and a binding.  This project uses the binding
+`slf4j-simple`.
+
+In order to configure simple logging, create the file
+`simplelogger.properties` in `src/main/resources/`.
+
+```bash
+# Must be one of ("trace", "debug", "info", "warn", or "error")
+org.slf4j.simpleLogger.defaultLogLevel=info
+```
+
+_See Also: http://www.slf4j.org/manual.html_
 
 ### WebJar
 

@@ -16,6 +16,7 @@ ext {
   jaxbVersion = '2.3.3'
   servletApiVersion = '4.0.1'
   urlRewriteVersion = '4.0.3'
+  slf4jVersion = '1.7.30'
   webjarVersion = '0.1.0-SNAPSHOT'
 }
 
@@ -28,6 +29,8 @@ dependencies {
   implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
   implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
+  implementation "org.slf4j:slf4j-api:${slf4jVersion}"
+  implementation "org.slf4j:slf4j-simple:${slf4jVersion}"
 
   implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
 
