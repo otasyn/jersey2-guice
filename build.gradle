@@ -4,42 +4,69 @@ plugins {
   id 'org.gretty' version '3.0.3'
 }
 
+group = 'org.otasyn.template'
+version = '0.1.0-SNAPSHOT'
+sourceCompatibility = JavaVersion.VERSION_11
+
 repositories {
   mavenLocal()
   jcenter()
 }
 
 ext {
+  jaxbVersion = '2.3.3'
   jerseyVersion = '2.31'
   guiceBridgeVersion = '2.6.1'
   guiceVersion = '4.2.3'
-  jaxbVersion = '2.3.3'
   servletApiVersion = '4.0.1'
+  slf4jVersion = '1.7.30'  
   urlRewriteVersion = '4.0.3'
-  slf4jVersion = '1.7.30'
+
   webjarVersion = '0.1.0-SNAPSHOT'
 }
 
 dependencies {
+
+  /*******************************/
+  /* Implementation Dependencies */
+  /*******************************/
+
+  /* JAX-B */
+  implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
+  implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
+
+  /* Jersey */
   implementation "org.glassfish.jersey.containers:jersey-container-servlet:${jerseyVersion}"
   implementation "org.glassfish.jersey.ext:jersey-mvc-jsp:${jerseyVersion}"
   implementation "org.glassfish.jersey.inject:jersey-hk2:${jerseyVersion}"
-  implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
+
+  /* Guice */
   implementation "com.google.inject:guice:${guiceVersion}"
-  implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
-  implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
-  implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
+
+  /* Guice Bridge */
+  implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
+
+  /* SLF4J */
   implementation "org.slf4j:slf4j-api:${slf4jVersion}"
   implementation "org.slf4j:slf4j-log4j12:${slf4jVersion}"
 
-  implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
+  /* UrlRewriteFilter */
+  implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
 
+  /*********************************/
+  /* Provided Compile Dependencies */
+  /*********************************/
+
+  /* Servlet */
   providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
-}
 
-group = 'org.otasyn.template'
-version = '0.1.0-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_11
+  /******************************/
+  /* Custom Client Dependencies */
+  /******************************/
+
+  /* Angular-Webjar */
+  implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
+}
 
 /**
  * Gretty
