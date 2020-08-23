@@ -14,17 +14,26 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.mvc.jsp.JspMvcFeature;
 import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ApplicationPath("/rest")
 public class Config extends ResourceConfig {
 
+  private static final Logger LOG = LoggerFactory.getLogger(Config.class);
+
+  private static final String PACKAGES = "org.otasyn.template.jersey2.guice";
+
   @Inject
   public Config(ServiceLocator serviceLocator) {
-    packages("org.otasyn.template.jersey2.guice");
+    LOG.debug(String.format("Set package for Jersey to scan: [%s].", PACKAGES));
+    packages(PACKAGES);
 
+    LOG.debug("Register JspMvcFeature.");
     property(JspMvcFeature.TEMPLATE_BASE_PATH, "/WEB-INF/jsp");
     register(JspMvcFeature.class);
 
+    LOG.debug("Initialize the Guice bridge.");
     GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
     GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
     guiceBridge.bridgeGuiceInjector(Guice.createInjector(new ProjectGuiceModule()));

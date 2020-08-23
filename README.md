@@ -51,14 +51,21 @@ dependencies {
 
 In this project, logging is handled by SLF4J.  In order to work, it needs
 dependencies for `slf4j-api` and a binding.  This project uses the binding
-`slf4j-simple`.
+`slf4j-log4j12`.
 
-In order to configure simple logging, create the file
-`simplelogger.properties` in `src/main/resources/`.
+In order to configure log4j logging, create the file
+`log4j.properties` in `src/main/resources/`.
 
 ```bash
-# Must be one of ("trace", "debug", "info", "warn", or "error")
-org.slf4j.simpleLogger.defaultLogLevel=info
+# Set the root log level.
+log4j.rootLogger = ERROR, CONSOLE
+
+# Define CONSOLE to be a ConsoleAppender.
+log4j.appender.CONSOLE = org.apache.log4j.ConsoleAppender
+
+# Configure CONSOLE to use PatternLayout.
+log4j.appender.CONSOLE.layout = org.apache.log4j.PatternLayout
+log4j.appender.CONSOLE.layout.ConversionPattern = [%d{yyyy-MM-dd HH:mm:ss.SSS}] %p %c - %m%n
 ```
 
 _See Also: http://www.slf4j.org/manual.html_
