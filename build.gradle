@@ -19,7 +19,8 @@ ext {
   guiceBridgeVersion = '2.6.1'
   guiceVersion = '4.2.3'
   servletApiVersion = '4.0.1'
-  slf4jVersion = '1.7.30'  
+  shiroVersion = '1.6.0'
+  slf4jVersion = '1.7.30'
   urlRewriteVersion = '4.0.3'
 
   webjarVersion = '0.1.0-SNAPSHOT'
@@ -46,9 +47,15 @@ dependencies {
   /* Guice Bridge */
   implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
 
+  /* Shiro */
+  implementation "org.apache.shiro:shiro-core:${shiroVersion}"
+  implementation "org.apache.shiro:shiro-web:${shiroVersion}"
+  implementation "org.apache.shiro:shiro-jaxrs:${shiroVersion}"
+
   /* SLF4J */
   implementation "org.slf4j:slf4j-api:${slf4jVersion}"
   implementation "org.slf4j:slf4j-log4j12:${slf4jVersion}"
+  implementation "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
 
   /* UrlRewriteFilter */
   implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"

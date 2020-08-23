@@ -40,6 +40,9 @@ dependencies {
   implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
   implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
+  implementation "org.apache.shiro:shiro-core:${shiroVersion}"
+  implementation "org.apache.shiro:shiro-web:${shiroVersion}"
+  implementation "org.apache.shiro:shiro-jaxrs:${shiroVersion}"
 
   implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
 
@@ -228,6 +231,75 @@ Create a file called `urlrewrite.xml` in `WEB-INF`.
   </rule>
 
 </urlrewrite>
+```
+
+### Security
+
+In order to secure the application, this project uses Shiro.  For the basic
+collection of features for securing a web application, include the
+`shiro-core` and `shiro-web` dependencies.  In order to add feature to allow
+Shiro to work well with Jersey, include the `shiro-jaxrs` dependency.
+
+#### Configuration
+
+There are multiple ways to configure Shiro, but to keep it relatively simple,
+this project uses `shiro.ini` in the `src/main/resources/` directory.
+
+```bash
+[main]
+# If the user is unauthenticated, this tells Shiro where to redirect
+# for the user to log in.
+authc.loginUrl = /login
+
+# Needed to cache the user authentication.
+cacheManager = org.apache.shiro.cache.MemoryConstrainedCacheManager
+securityManager.cacheManager = $cacheManager
+
+[users]
+# Create static users and password with roles and permissions.
+# Do not use this method in production.
+admin = secret,admin
+reader = secret,samplereader
+creator = secret,samplecreator
+guest = secret
+
+[roles]
+# Define roles that may be given to users to determine access privileges.
+admin = *
+samplereader = sample:read
+samplecreator = sample:read, sample:create
+
+[urls]
+# Determine the necessary security requirements for URL paths.
+/ = anon
+/webjars/** = anon
+
+# The URL that will logout the user.
+/logout = logout
+
+# Everything will require authentication unless specified above
+# or in annotations.
+/** = authc
+```
+
+#### Annotations
+
+The security requirements may also be specified using annotations,
+such as `@RequiresAuthentication` and `@RequiresPermissions`.
+
+```java
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+
+public class SampleWebService {
+
+  @GET
+  @RequiresPermissions("sample:read")
+  public String get() {
+    LOG.debug("Get a sample message.");
+    return sampleService.getMessage();
+  }
+
+}
 ```
 
 Original Source

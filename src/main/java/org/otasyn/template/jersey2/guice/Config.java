@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import javax.inject.Inject;
 import javax.ws.rs.ApplicationPath;
 
+import org.apache.shiro.web.jaxrs.ShiroFeature;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -32,6 +33,9 @@ public class Config extends ResourceConfig {
     LOG.debug("Register JspMvcFeature.");
     property(JspMvcFeature.TEMPLATE_BASE_PATH, "/WEB-INF/jsp");
     register(JspMvcFeature.class);
+
+    LOG.debug("Register ShiroFeature.");
+    register(ShiroFeature.class);
 
     LOG.debug("Initialize the Guice bridge.");
     GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);

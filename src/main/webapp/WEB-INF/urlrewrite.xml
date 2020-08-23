@@ -36,6 +36,24 @@
   </rule>
 
   <rule>
+    <name>Forward-Login</name>
+    <note>
+      Forward /login requests to /rest/views/login.
+    </note>
+    <from>^/login(/.*)?$</from>
+    <to last="true">/rest/views/login</to>
+  </rule>
+
+  <rule>
+    <name>Forward-Restricted</name>
+    <note>
+      Forward /restricted requests to /rest/views/restricted.
+    </note>
+    <from>^/restricted(/.*)?$</from>
+    <to last="true">/rest/views/restricted</to>
+  </rule>
+
+  <rule>
     <name>Forward-Everything-Else</name>
     <note>
       Forward all other requests to /rest/views.
