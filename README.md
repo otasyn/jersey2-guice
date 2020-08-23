@@ -43,6 +43,7 @@ dependencies {
   implementation "org.apache.shiro:shiro-core:${shiroVersion}"
   implementation "org.apache.shiro:shiro-web:${shiroVersion}"
   implementation "org.apache.shiro:shiro-jaxrs:${shiroVersion}"
+  implementation "com.typesafe:config:${typesafeConfigVersion}"
 
   implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
 
@@ -197,7 +198,7 @@ something other than root.
 
 ```java
 @ApplicationPath("/rest")
-public class Config extends ResourceConfig {
+public class ProjectConfig extends ResourceConfig {
   ...
 }
 ```
@@ -301,6 +302,66 @@ public class SampleWebService {
 
 }
 ```
+
+### Typesafe Config
+
+Typesafe Config enables a simple way to bring in config values from
+a human-readable file in a JSON superset format.
+
+#### Configuration File
+
+Create `reference.conf` in `src/main/resources/`.  This file will contain
+all the default values for the project.  Additional files, such as
+`application.conf`, and system properties can override the configs in
+`reference.conf`.
+
+```javascript
+org.otasyn.template.jersey2.guice {
+  public {
+    sample {
+      message = "Hello from typesafe config."
+    }
+  }
+}
+```
+
+#### Load Configuration
+
+Since this project uses Guice, it loads the config and provides it
+for injection into other classes.  It also uses a custom created
+Guice binding annotation `TypesafeConfig`.  This helps Guice
+identify provided instances for injection.
+
+```java
+public class ProjectGuiceModule extends AbstractModule {
+  ...
+  @Provides
+  @TypesafeConfig
+  Config provideTypesafeConfig() {
+    return ConfigFactory.load().getConfig("org.otasyn.template.jersey2.guice");
+  }
+}
+```
+
+#### Inject Configuration
+
+Now that the config has been provided by Guice, we can inject it into
+other classes.
+
+```java
+public class DefaultSampleService implements SampleService {
+  private Config sampleConfig;
+
+  @Inject
+  public DefaultSampleService {
+    @TypesafeConfig Config config
+  ) {
+    this.sampleConfig = config.getConfig("public.sample");
+  }
+}
+```
+
+_See Also: https://lightbend.github.io/config/_
 
 Original Source
 ---------------

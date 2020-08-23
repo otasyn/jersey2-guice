@@ -21,6 +21,7 @@ ext {
   servletApiVersion = '4.0.1'
   shiroVersion = '1.6.0'
   slf4jVersion = '1.7.30'
+  typesafeConfigVersion = '1.4.0'
   urlRewriteVersion = '4.0.3'
 
   webjarVersion = '0.1.0-SNAPSHOT'
@@ -56,6 +57,9 @@ dependencies {
   implementation "org.slf4j:slf4j-api:${slf4jVersion}"
   implementation "org.slf4j:slf4j-log4j12:${slf4jVersion}"
   implementation "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+
+  /* Typesafe Config */
+  implementation "com.typesafe:config:${typesafeConfigVersion}"
 
   /* UrlRewriteFilter */
   implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"

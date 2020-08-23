@@ -19,14 +19,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ApplicationPath("/rest")
-public class Config extends ResourceConfig {
+public class ProjectConfig extends ResourceConfig {
 
-  private static final Logger LOG = LoggerFactory.getLogger(Config.class);
+  private static final Logger LOG = LoggerFactory.getLogger(ProjectConfig.class);
 
   private static final String PACKAGES = "org.otasyn.template.jersey2.guice";
 
   @Inject
-  public Config(ServiceLocator serviceLocator) {
+  public ProjectConfig(ServiceLocator serviceLocator) {
     LOG.debug(String.format("Set package for Jersey to scan: [%s].", PACKAGES));
     packages(PACKAGES);
 

@@ -39,4 +39,12 @@ public class SampleWebService {
     return "Path message: " + message;
   }
 
+  @GET
+  @Path("typesafe")
+  @RequiresPermissions("sample:read")
+  public String getWithTypesafeConfigMessage() {
+    LOG.debug("Get a sample message from typesafe config.");
+
+    return sampleService.getTypesafeConfigMessage();
+  }
 }

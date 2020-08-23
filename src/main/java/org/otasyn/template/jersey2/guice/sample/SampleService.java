@@ -4,4 +4,6 @@ public interface SampleService {
 
   String getMessage();
 
+  String getTypesafeConfigMessage();
+
 }
