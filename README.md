@@ -48,6 +48,10 @@ dependencies {
   implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
 
   providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
+
+  testImplementation platform("org.spockframework:spock-bom:${spockVersion}")
+  testImplementation "org.spockframework:spock-core"
+  testImplementation "org.spockframework:spock-guice"
 }
 ```
 
@@ -362,6 +366,56 @@ public class DefaultSampleService implements SampleService {
 ```
 
 _See Also: https://lightbend.github.io/config/_
+
+### Spock Testing
+
+For unit test, this project uses the Spock framework.  To include this
+as a test dependency, use the platform `spock-bom`, the include `spock-core`
+and `spock-guice`.  To run the tests, use the `test` task.
+
+```bash
+$ ./gradlew test
+```
+
+#### Guice Module with Mocks
+
+Within a Spock specification, normally you can create mocks.  However, in order
+to bind mocks in a Guice module, use `DetachedMockFactory`.
+
+```groovy
+class MockGuiceModule extends AbstractModule {
+
+  @Override
+  protected void configure() {
+    DetachedMockFactory dmf = new DetachedMockFactory();
+
+    bind(AnotherService).toInstance(dmf.Mock(AnotherService))
+    bind(SampleService).toInstance(dmf.Mock(SampleService))
+  }
+
+}
+```
+
+To use the Guice modules in a specification, use the `@UseModules` annotation.
+To get an instance of the class being tested, inject a `Provider` with the class
+as the generic type.  Then, call the `get()` method on that instance in `setup()`.
+
+```groovy
+@UseModule(MockGuiceModule)
+class SampleWebServiceSpec extends Specification {
+  
+  @Inject Provider<SampleWebService> toTestProvider
+  def toTest
+
+  def setup() {
+    toTest = toTestProvider.get()
+  }
+
+  ...
+}
+```
+
+*See Also: http://spockframework.org/spock/docs/1.3/all_in_one.html*
 
 Original Source
 ---------------
