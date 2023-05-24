@@ -1,8 +1,24 @@
 Jersey2 - Guice Bridge with WebJar
 ==================================
 
-This is a template that combines Jersey 2 and Guice.  It uses the
-[HK2 guice-bridge](https://github.com/javaee/hk2/tree/master/guice-bridge).
+This is a skeleton app that demonstrate how certain frameworks can be used together.
+This was meant as a starting point for standing up new applications.
+In particular, ths project stands up a Java web application using several open source frameworks and the
+[angular-webjar](https://github.com/otasyn/angular-webjar) project is a client app that is bundled up into
+a WebJar to be deployed by this server app.
+
+1) Jersey is a JAX-RS implementation used to create RESTful endpoints.
+2) Guice is used for dependency injection (DI).  By default, Jersey uses HK2 for DI, so a major reason for
+   this project is to demonstrate how to configure the
+   [HK2 guice-bridge](https://github.com/javaee/hk2/tree/master/guice-bridge) to use Guice instead of HK2.
+3) URLRewriteFilter is used to help create clean, human-readable URLs.
+4) Shiro is used to add security to the application.  For this project, it primarily handles authentication
+   and access control.
+5) Typesafe Config is used to store environment-specific property values, such as app names and database
+   connections that can be automatically applied at runtime for the appropriate environment.
+6) It demonstrates how to deploy a client app stored in a WebJar, specifically [angular-webjar](https://github.com/otasyn/angular-webjar).
+7) Spock is used to implement server-side unit testing.
+8) Gradle is used to build and deploye the application.
 
 Adjustments
 -----------
