@@ -21,9 +21,9 @@ ext {
   guiceBridgeVersion = '2.6.1' // Highest versions without using Jakarta EE.
   guiceVersion = '7.0.0'
   servletApiVersion = '4.0.1' // Highest versions without using Jakarta EE.
-  shiroVersion = '1.6.0'
-  slf4jVersion = '1.7.30'
-  typesafeConfigVersion = '1.4.0'
+  shiroVersion = '1.9.1'
+  slf4jVersion = '2.0.7'
+  typesafeConfigVersion = '1.4.2'
   urlRewriteVersion = '4.0.3'
 
   /* test dependencies */
