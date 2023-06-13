@@ -1,8 +1,8 @@
 package org.otasyn.template.jersey2.guice;
 
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
-import javax.servlet.DispatcherType;
+import jakarta.servlet.annotation.WebFilter;
+import jakarta.servlet.annotation.WebInitParam;
+import jakarta.servlet.DispatcherType;
 
 import org.tuckey.web.filters.urlrewrite.UrlRewriteFilter;
 

@@ -5,8 +5,8 @@ import com.google.inject.Injector;
 
 import java.util.logging.Level;
 
-import javax.inject.Inject;
-import javax.ws.rs.ApplicationPath;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.ApplicationPath;
 
 import org.apache.shiro.web.jaxrs.ShiroFeature;
 import org.glassfish.hk2.api.ServiceLocator;

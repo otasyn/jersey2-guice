@@ -2,7 +2,7 @@ plugins {
   id 'groovy'
   id 'java'
   id 'war'
-  id 'org.gretty' version '3.1.1'
+  id 'org.gretty' version '4.0.3' 
 }
 
 group = 'org.otasyn.template'
@@ -16,15 +16,17 @@ repositories {
 
 ext {
   /* dependencies */
-  jaxbVersion = '2.3.1' // Highest versions without using Jakarta EE.
-  jerseyVersion = '2.39.1' // Highest versions without using Jakarta EE.
-  guiceBridgeVersion = '2.6.1' // Highest versions without using Jakarta EE.
+  jaxbVersion = '4.0.0'
+  jerseyVersion = '3.1.2'
+  guiceBridgeVersion = '3.0.4'
   guiceVersion = '7.0.0'
-  servletApiVersion = '4.0.1' // Highest versions without using Jakarta EE.
+  //omnifacesVersion = '4.1'
+  servletApiVersion = '6.0.0'
+  //shiroVersion = '2.0.0-alpha-2'
   shiroVersion = '1.11.0'
-  slf4jVersion = '2.0.7'
+  slf4jVersion = '1.7.30'
   typesafeConfigVersion = '1.4.2'
-  urlRewriteVersion = '4.0.3'
+  urlRewriteVersion = '5.0.0-SNAPSHOT'
 
   /* test dependencies */
   groovyVersion = '4.0.12'
@@ -41,7 +43,7 @@ dependencies {
   /*******************************/
 
   /* JAX-B */
-  implementation "javax.xml.bind:jaxb-api:${jaxbVersion}"
+  implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbVersion}"
   implementation "org.glassfish.jaxb:jaxb-runtime:${jaxbVersion}"
 
   /* Jersey */
@@ -55,10 +57,15 @@ dependencies {
   /* Guice Bridge */
   implementation "org.glassfish.hk2:guice-bridge:${guiceBridgeVersion}"
 
+  /* OmniFaces */
+  //implementation "org.omnifaces:omnifaces:${omnifacesVersion}"
+
   /* Shiro */
-  implementation "org.apache.shiro:shiro-core:${shiroVersion}"
-  implementation "org.apache.shiro:shiro-web:${shiroVersion}"
-  implementation "org.apache.shiro:shiro-jaxrs:${shiroVersion}"
+  implementation platform("org.apache.shiro:shiro-bom:${shiroVersion}")
+  //implementation "org.apache.shiro:shiro-jakarta-ee:${shiroVersion}:jakarta"
+  implementation "org.apache.shiro:shiro-core:${shiroVersion}:jakarta"
+  implementation "org.apache.shiro:shiro-web:${shiroVersion}:jakarta"
+  implementation "org.apache.shiro:shiro-jaxrs:${shiroVersion}:jakarta"
 
   /* SLF4J */
   implementation "org.slf4j:slf4j-api:${slf4jVersion}"
@@ -69,14 +76,15 @@ dependencies {
   implementation "com.typesafe:config:${typesafeConfigVersion}"
 
   /* UrlRewriteFilter */
-  implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}"
+  implementation "org.tuckey:urlrewritefilter:${urlRewriteVersion}:jakarta"
 
   /*********************************/
   /* Provided Compile Dependencies */
   /*********************************/
 
   /* Servlet */
-  providedCompile "javax.servlet:javax.servlet-api:${servletApiVersion}"
+  providedCompile "jakarta.servlet:jakarta.servlet-api:${servletApiVersion}"
+  implementation "javax.servlet:javax.servlet-api:4.0.1"
 
   /************************************/
   /* Test Implementation Dependencies */
@@ -116,6 +124,6 @@ configurations.all {
 gretty {
   contextPath 'jersey2-guice'
 
-  servletContainer 'tomcat9'
-  // servletContainer 'jetty9.4'
+  servletContainer 'tomcat10'
+  //servletContainer 'jetty11'
 }

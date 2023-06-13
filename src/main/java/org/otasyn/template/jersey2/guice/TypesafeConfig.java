@@ -3,7 +3,7 @@ package org.otasyn.template.jersey2.guice;
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
 
-import javax.inject.Qualifier;
+import jakarta.inject.Qualifier;
 
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.FIELD;

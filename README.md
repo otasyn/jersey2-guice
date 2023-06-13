@@ -63,7 +63,7 @@ dependencies {
 
   implementation "org.otasyn.template:angular-webjar:${webjarVersion}"
 
-  providedCompile "javax.servlet:javax.servlet-api:{servletApiVersion}"
+  providedCompile "jakarta.servlet:jakarta.servlet-api:{servletApiVersion}"
 
   testImplementation platform("org.spockframework:spock-bom:${spockVersion}")
   testImplementation "org.spockframework:spock-core"

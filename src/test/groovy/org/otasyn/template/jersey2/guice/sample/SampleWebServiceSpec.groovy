@@ -3,8 +3,8 @@ package org.otasyn.template.jersey2.guice.sample
 import com.typesafe.config.Config
 import com.typesafe.config.ConfigFactory
 
-import javax.inject.Inject
-import javax.inject.Provider
+import jakarta.inject.Inject
+import jakarta.inject.Provider
 
 import spock.guice.UseModules
 import spock.lang.Specification
