@@ -18,7 +18,7 @@ a WebJar to be deployed by this server app.
    connections that can be automatically applied at runtime for the appropriate environment.
 6) It demonstrates how to deploy a client app stored in a WebJar, specifically [angular-webjar](https://github.com/otasyn/angular-webjar).
 7) Spock is used to implement server-side unit testing.
-8) Gradle is used to build and deploye the application.
+8) Gradle is used to build and deploy the application.
 
 Adjustments
 -----------
